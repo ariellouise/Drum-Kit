@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Forest Sounds-Ariel Murphy</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <h1>FOREST SOUNDS</h1>
+
+    <div class="keys">
+      <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">Creek</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>S</kbd>
+        <span class="sound">Birds</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span class="sound">Crickets</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span class="sound">Wind</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>G</kbd>
+        <span class="sound">Thunder</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>H</kbd>
+        <span class="sound">Fire</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>J</kbd>
+        <span class="sound">Woodpecker</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>K</kbd>
+        <span class="sound">Snow Storm</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd>
+        <span class="sound">Wolves</span>
+      </div>
+    </div>
+
+    <audio data-key="65" src="Sounds/sounds/Creek in the Mountains.wav"></audio>
+    <audio
+      data-key="83"
+      src="sounds/sounds/Countryside Birdsong Nature Ambience.wav"
+    ></audio>
+    <audio
+      data-key="68"
+      src="sounds/sounds/AmbienceForest+SUP01_04.wav"
+    ></audio>
+    <audio
+      data-key="70"
+      src="sounds/sounds/13758 wind in forest nature loop.wav"
+    ></audio>
+    <audio
+      data-key="71"
+      src="sounds/sounds/Quest_Game_Ambience_Nature_Lightning_Strike_with_Thunder.wav"
+    ></audio>
+    <audio
+      data-key="72"
+      src="sounds/sounds/20429 four elementals nature ambience loop-full.wav"
+    ></audio>
+    <audio
+      data-key="74"
+      src="sounds/sounds/ForestEurope_DIGIC14-15.wav"
+    ></audio>
+    <audio data-key="75" src="sounds/sounds/tom.wav"></audio>
+    <audio data-key="76" src="sounds/sounds/tink.wav"></audio>
+
+    <div class="footer">2023 © ARIEL MURPHY</div>
+
+    <script>
+      function playSound(e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        //attribute selector ^
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if (!audio) return; //stops the function from running all together
+        audio.currentTime = 0; //Rewind to the start
+        audio.play();
+        key.classList.add("playing");
+      }
+
+      //Transition End Event
+
+      function removeTransition(e) {
+        if (e.propertyName !== "transform") return; //skip if its not transform - we chose transform because it is the longest lasting property changing when running that transition
+        this.classList.remove("playing");
+      }
+      const keys = document.querySelectorAll(".key");
+      keys.forEach((key) =>
+        key.addEventListener("transitionend", removeTransition)
+      );
+      window.addEventListener("keydown", playSound);
+    </script>
+  </body>
+</html>
